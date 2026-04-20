@@ -218,6 +218,11 @@ const CreateContent = () => {
           </form>
         </div>
 
+
+
+
+
+
         <aside className="assets-sidebar">
           <div className="sidebar-group">
             <div className="group-label">ASSOCIATED ASSETS</div>
