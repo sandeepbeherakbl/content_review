@@ -60,14 +60,8 @@ The platform features a deeply integrated AI writing assistant that transforms s
    npm install
    ```
 
-2. **Environment Configuration**:
-   Create a `.env` file in the backend with your `GROQ_API_KEY`.
-
 3. **Run Locally**:
    ```bash
-   # Start Backend
-   cd content-flow-backend && npm run dev
-   
    # Start Frontend
    cd content-review-frontend && npm run dev
    ```
