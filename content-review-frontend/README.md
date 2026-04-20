@@ -1,6 +1,6 @@
-# EliteFlow: Premium Content Review & AI Generation System
+# ContentFlow - Content Review & AI Generation System
 
-EliteFlow is a state-of-the-art, full-stack platform designed for elite content teams. It combines a high-end, luxury user interface with a robust multi-stage approval workflow and advanced AI-powered content generation.
+A full-stack application for managing content creation, multi-stage approval workflows, and AI-powered content generation.
 
 ## 🚀 Content Lifecycle & Workflow
 
@@ -32,7 +32,7 @@ graph TD
 
 ### 🤖 AI Content Assistant (Advanced Feature)
 The platform features a deeply integrated AI writing assistant that transforms simple topics into complete articles.
-- **Smart Prompt Bar**: A Google Gemini-inspired interactive input bar with context-aware controls.
+- **Smart Prompt Bar**: A llama-3 inspired interactive input bar with context-aware controls.
 - **Typing Animation**: A sophisticated simulated streaming effect that "types" the AI response char-by-char for a high-end experience.
 - **Context-Aware Completion**: Powered by Llama-3 (via Groq SDK), ensuring professional tone and consistent conclusions.
 - **Auto-Titling**: The system intelligently generates relevant titles based on your AI prompt.
@@ -71,6 +71,3 @@ The platform features a deeply integrated AI writing assistant that transforms s
    # Start Frontend
    cd content-review-frontend && npm run dev
    ```
-
----
-*Developed for excellence in Content Workflow Management.*

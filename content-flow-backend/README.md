@@ -13,9 +13,9 @@ ContentFlow provides a streamlined process for content creators to draft article
 
 ```mermaid
 graph TD
-    A[Start: Creator Writes Content] --> B{Status: Draft}
-    B -- Use AI Sparkle --> B
-    B -- Submit --> C[Review Stage 1: L1]
+    A[Start: Creator Writes Content]
+    
+    A -- Submit --> C[Review Stage 1: L1]
     
     C -- Approve --> D[Review Stage 2: L2]
     C -- Reject --> E[Status: Rejected / Version++]
@@ -24,10 +24,6 @@ graph TD
     D -- Reject --> E
     
     E -- Edit & Re-submit --> C
-    
-    style B fill:#f9f,stroke:#333,stroke-width:2px
-    style F fill:#9f9,stroke:#333,stroke-width:2px
-    style E fill:#f99,stroke:#333,stroke-width:2px
 ```
 
 ---
@@ -39,36 +35,33 @@ graph TD
 - **MySQL** Database
 - **Groq API Key** (for AI generation)
 
-### 1. Backend Setup
+
+## 📦 Setup & Development
+
+1. **Clone & Install**:
+   ```bash
+   # In frontend and backend directories
+   npm install
+   ```
+
+2. **Environment Configuration**:
 ```bash
-# Navigate to backend directory
-cd content-flow-backend
-
-# Install dependencies
-npm install
-
-# Create a .env file
-# Add:
-# PORT=5000
-# DB_HOST=localhost
-# DB_USER=root
-# DB_PASSWORD=your_password
-# DB_NAME=content_flow
-# JWT_SECRET=your_jwt_secret
-# GROQ_API_KEY=your_groq_api_key
+   # Create a .env file
+   # Add:
+   # PORT=5000
+   # DB_HOST=localhost
+   # DB_USER=root
+   # DB_PASSWORD=your_password
+   # DB_NAME=content_flow
+   # JWT_SECRET=your_jwt_secret
+   # GROQ_API_KEY=your_groq_api_key
 ```
 
-### 2. Frontend Setup
-```bash
-# Navigate to frontend directory
-cd content-review-frontend
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-```
+3. **Run Locally**:
+   ```bash
+   # Start Backend
+   cd content-flow-backend && npm run dev
+   ```
 
 ---
 
@@ -116,6 +109,3 @@ npm run dev
 - **Admin**: Full oversight, can perform all Creator actions and view all data.
 
 ---
-
-## 📄 License
-ISC License
