@@ -7,9 +7,9 @@ import './CreateContent.css';
 const EditContent = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ 
-    title: '', 
-    body: '' 
+  const [formData, setFormData] = useState({
+    title: '',
+    body: ''
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -36,7 +36,6 @@ const EditContent = () => {
     setSaving(true);
     try {
       await api.put(`/content/${id}`, formData);
-      // Backend should reset status to pending_review and stage to 1
       navigate(`/content/${id}`);
     } catch (error) {
       alert('Update failed: ' + error.message);
@@ -56,12 +55,12 @@ const EditContent = () => {
           <span className="current">Edit & Resubmit</span>
         </div>
         <div className="header-main-actions">
-           <button type="button" className="btn-ghost" onClick={() => navigate(-1)}>
-             Cancel
-           </button>
-           <button type="submit" form="edit-form" className="btn-premium" disabled={saving}>
-             <Save size={16} /> {saving ? 'Resubmitting...' : 'Resubmit for Review'}
-           </button>
+          <button type="button" className="btn-ghost" onClick={() => navigate(-1)}>
+            Cancel
+          </button>
+          <button type="submit" form="edit-form" className="btn-premium" disabled={saving}>
+            <Save size={16} /> {saving ? 'Resubmitting...' : 'Resubmit for Review'}
+          </button>
         </div>
       </div>
 
@@ -69,22 +68,22 @@ const EditContent = () => {
         <div className="editor-section">
           <form id="edit-form" className="create-form-luxe" onSubmit={handleUpdate}>
             <div className="input-field-group">
-              <input 
-                type="text" 
-                className="luxe-title-input" 
+              <input
+                type="text"
+                className="luxe-title-input"
                 placeholder="Content Title"
                 value={formData.title}
-                onChange={(e) => setFormData({...formData, title: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 required
               />
             </div>
 
             <div className="editor-container">
-              <textarea 
-                className="luxe-body-editor" 
+              <textarea
+                className="luxe-body-editor"
                 placeholder="Update your content..."
                 value={formData.body}
-                onChange={(e) => setFormData({...formData, body: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, body: e.target.value })}
                 required
               ></textarea>
             </div>
@@ -95,8 +94,8 @@ const EditContent = () => {
           <div className="sidebar-group info">
             <div className="group-label">RE-SUBMISSION INFO</div>
             <div className="workflow-hint" style={{ background: 'rgba(255, 59, 48, 0.05)', borderLeftColor: 'var(--rejected)' }}>
-               <Info size={14} style={{ marginBottom: '8px', display: 'block' }} />
-               Editing this content will reset the approval workflow. It will start again from <strong>Stage 1 (Editorial Review)</strong>.
+              <Info size={14} style={{ marginBottom: '8px', display: 'block' }} />
+              Editing this content will reset the approval workflow. It will start again from <strong>Stage 1 (Editorial Review)</strong>.
             </div>
           </div>
         </aside>

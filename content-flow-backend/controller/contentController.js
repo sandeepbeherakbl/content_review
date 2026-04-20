@@ -13,7 +13,6 @@ export const createContent = async (req, res) => {
             [id, userId, title, body]
         );
 
-        // Log initial version in edit_cycles
         await pool.query(
             `INSERT INTO edit_cycles (id, content_id, editor_id, version, body_snapshot, edited_at)
              VALUES (?, ?, ?, 1, ?, NOW())`,
@@ -50,7 +49,6 @@ export const getContentById = async (req, res) => {
     try {
         const { id } = req.params;
 
-        // Fetch content with creator name
         const [contents] = await pool.query(
             `SELECT c.*, u.username as creator_name 
              FROM content c 
@@ -63,7 +61,6 @@ export const getContentById = async (req, res) => {
             return res.status(404).json({ message: "Content not found" });
         }
 
-        // Fetch review history with reviewer names
         const [history] = await pool.query(
             `SELECT ra.*, u.username as reviewer_name 
              FROM review_actions ra 
@@ -73,7 +70,6 @@ export const getContentById = async (req, res) => {
             [id]
         );
 
-        // Fetch sub-content assets
         const [subContent] = await pool.query(
             "SELECT * FROM sub_content WHERE parent_id = ?",
             [id]
@@ -111,7 +107,6 @@ export const updateContent = async (req, res) => {
 
         const newVersion = content.version + 1;
 
-        // 1. Update content record
         await pool.query(
             `UPDATE content 
              SET title = ?, body = ?, status = 'pending_review', current_stage = 1, version = ?, updated_at = NOW() 
@@ -119,7 +114,6 @@ export const updateContent = async (req, res) => {
             [title, body, newVersion, id]
         );
 
-        // 2. Log the edit cycle snapshot
         await pool.query(
             `INSERT INTO edit_cycles (id, content_id, editor_id, version, body_snapshot, edited_at)
              VALUES (?, ?, ?, ?, ?, NOW())`,

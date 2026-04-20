@@ -5,7 +5,6 @@ export const createSubContent = async (req, res) => {
         const { parentId, title, body } = req.body;
         const userId = req.user.id;
 
-        // Check parent exists
         const [parent] = await pool.query(
             "SELECT * FROM content WHERE id = ?",
             [parentId]

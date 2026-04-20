@@ -10,7 +10,6 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: "Username and password are required" });
         }
 
-        // 1. Check user
         const [users] = await pool.query(
             "SELECT * FROM users WHERE username = ?",
             [username]
@@ -23,7 +22,6 @@ export const login = async (req, res) => {
 
         const user = users[0];
 
-        // 2. Compare password
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
@@ -31,14 +29,12 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: "Invalid username or password" });
         }
 
-        // 3. Generate token
         const token = jwt.sign(
             { id: user.id, role: user.role },
             process.env.JWT_SECRET,
             { expiresIn: process.env.JWT_EXPIRES_IN }
         );
 
-        // 4. Response
         res.json({
             message: "Login successful",
             token,

@@ -21,7 +21,6 @@ export const approveContent = async (req, res) => {
             return res.status(400).json({ message: "Content not in review stage" });
         }
 
-        // Stage validation
         if (content.current_stage === 1 && role !== "reviewer_l1") {
             return res.status(403).json({ message: "Only L1 reviewer can approve" });
         }
@@ -33,7 +32,6 @@ export const approveContent = async (req, res) => {
         let newStatus = content.status;
         let newStage = content.current_stage;
 
-        // Move to next stage
         if (content.current_stage === 1) {
             newStage = 2;
         } else if (content.current_stage === 2) {
@@ -45,7 +43,6 @@ export const approveContent = async (req, res) => {
             2: "a1000000-0000-0000-0000-000000000002",
         };
 
-        // Insert review log
         await pool.query(
             `INSERT INTO review_actions 
        (id, content_id, reviewer_id, stage_id, decision, content_version, acted_at)
@@ -59,7 +56,6 @@ export const approveContent = async (req, res) => {
             ]
         );
 
-        // Update content
         await pool.query(
             `UPDATE content 
        SET status = ?, current_stage = ?, updated_at = NOW()
@@ -96,7 +92,6 @@ export const rejectContent = async (req, res) => {
             return res.status(400).json({ message: "Content not in review stage" });
         }
 
-        // Role validation
         if (
             (content.current_stage === 1 && role !== "reviewer_l1") ||
             (content.current_stage === 2 && role !== "reviewer_l2")
@@ -109,7 +104,6 @@ export const rejectContent = async (req, res) => {
             2: "a1000000-0000-0000-0000-000000000002",
         };
 
-        // Insert review log
         await pool.query(
             `INSERT INTO review_actions 
        (id, content_id, reviewer_id, stage_id, decision, comment, content_version, acted_at)
@@ -124,7 +118,6 @@ export const rejectContent = async (req, res) => {
             ]
         );
 
-        // Update content
         await pool.query(
             `UPDATE content 
        SET status = 'rejected', current_stage = 1, version = version + 1, updated_at = NOW()

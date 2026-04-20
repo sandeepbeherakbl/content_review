@@ -54,7 +54,6 @@ const CreateContent = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      // 1. Save Parent Content
       const parentResponse = await api.post('/content', {
         title: formData.title,
         body: formData.body
@@ -62,7 +61,6 @@ const CreateContent = () => {
 
       const parentId = parentResponse.id;
 
-      // 2. Save Sub-Content (Sequential to avoid ECONNRESET on free tier DB)
       if (formData.subContent.length > 0) {
         for (const sub of formData.subContent) {
           await api.post('/sub-content', {
@@ -94,7 +92,6 @@ const CreateContent = () => {
       };
       if (token) headers['Authorization'] = `Bearer ${token}`;
 
-      // Using browser fetch directly for streaming support
       const response = await fetch('http://localhost:5000/api/ai/generate-stream', {
         method: 'POST',
         headers,
@@ -112,9 +109,8 @@ const CreateContent = () => {
         title: prev.title || aiTopic
       }));
 
-      // typing animation
       let currentIdx = 0;
-      const step = Math.max(1, Math.ceil(completionText.length / 100)); // ~100 steps
+      const step = Math.max(1, Math.ceil(completionText.length / 100));
 
       const typeNext = () => {
         if (currentIdx < completionText.length) {
@@ -137,7 +133,7 @@ const CreateContent = () => {
     } catch (error) {
       console.error('AI Generation Error:', error);
       alert('Failed to generate content: ' + error.message);
-      setIsStreaming(false); // Error case
+      setIsStreaming(false);
     }
   };
 

@@ -21,9 +21,9 @@ const ContentDetail = () => {
     const fetchDetail = async () => {
       try {
         const data = await api.get(`/content/${id}`);
-        setContent({ 
-          ...data.content, 
-          history: data.history || [] 
+        setContent({
+          ...data.content,
+          history: data.history || []
         });
         setSubContent(data.subContent || []);
       } catch (error) {
@@ -52,9 +52,9 @@ const ContentDetail = () => {
         comment: reviewComment
       });
       const data = await api.get(`/content/${id}`);
-      setContent({ 
-        ...data.content, 
-        history: data.history || [] 
+      setContent({
+        ...data.content,
+        history: data.history || []
       });
       setSubContent(data.subContent || []);
       setDecision('');
@@ -99,7 +99,6 @@ const ContentDetail = () => {
           </div>
         </div>
 
-        {/* Horizontal Stepper Card */}
         <div className="card stepper-card mb-24">
           <div className="card-label">APPROVAL PROGRESS</div>
           <div className="horizontal-stepper">
@@ -134,7 +133,6 @@ const ContentDetail = () => {
         </div>
 
         <div className="detail-main-grid">
-          {/* Left Column */}
           <div className="detail-col-content">
             <div className="card mb-24">
               <div className="card-header-simple">
@@ -150,7 +148,6 @@ const ContentDetail = () => {
             <div className="card">
               <div className="card-header-simple flex-between">
                 <h3>Sub-content</h3>
-                {/* <button className="btn-lite">+ Add</button> */}
               </div>
               <div className="sub-content-list">
                 {subContent.length > 0 ? subContent.map(sub => (
@@ -159,7 +156,6 @@ const ContentDetail = () => {
                       <span className="sub-item-title">{sub.title}</span>
                       <span className="sub-item-meta">sub-content · {sub.status}</span>
                     </div>
-                    {/* <span className={`badge-pill badge-${sub.status}`}>{sub.status}</span> */}
                   </div>
                 )) : (
                   <div className="empty-subs">No associated assets found.</div>
@@ -168,7 +164,6 @@ const ContentDetail = () => {
             </div>
           </div>
 
-          {/* Right Column */}
           <div className="detail-col-sidebar">
             {showReviewPanel && (
               <div className="review-action-panel card mb-20">

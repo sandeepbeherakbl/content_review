@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Users as UsersIcon, Shield, Mail, Calendar } from 'lucide-react';
 import api from '../services/api';
-import './Dashboard.css'; // Reusing established card and table styles
+import './Dashboard.css';
 
 const UsersPage = () => {
   const [users, setUsers] = useState([]);

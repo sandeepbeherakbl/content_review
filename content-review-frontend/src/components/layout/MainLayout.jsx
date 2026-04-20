@@ -13,7 +13,6 @@ const MainLayout = () => {
     return <Navigate to="/login" replace />;
   }
 
-  // Determine dynamic title
   const getPageTitle = (pathname) => {
     if (pathname === '/dashboard') return 'Dashboard';
     if (pathname === '/content') return 'All Content';
@@ -36,10 +35,10 @@ const MainLayout = () => {
             <span className="topbar-breadcrumb">ContentFlow / {pageTitle}</span>
             <div className="topbar-actions">
               {(location.pathname === '/content' || location.pathname === '/dashboard') && (user?.role === 'creator' || user?.role === 'admin') && (
-              <Link to="/create" className="btn-primary-sm">
-                <Plus size={14} /> New Content
-              </Link>
-            )}
+                <Link to="/create" className="btn-primary-sm">
+                  <Plus size={14} /> New Content
+                </Link>
+              )}
             </div>
           </div>
         </div>
